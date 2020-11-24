@@ -23,8 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Resource
     private UserMapper userMapper;
-    @Resource
-    private RoleMapper roleMapper;
+
     @Resource
     private UserRoleMapper userRoleMapper;
 

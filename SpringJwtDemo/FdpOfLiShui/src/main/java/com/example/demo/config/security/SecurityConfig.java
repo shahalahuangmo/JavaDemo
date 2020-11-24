@@ -8,6 +8,7 @@ import com.example.demo.config.security.login.AdminAuthenticationEntryPoint;
 import com.example.demo.config.security.url.UrlAccessDecisionManager;
 import com.example.demo.config.security.url.UrlAccessDeniedHandler;
 import com.example.demo.config.security.url.UrlFilterInvocationSecurityMetadataSource;
+import com.example.demo.system.mapper.basemapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +37,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     /**
      * 访问鉴权 - 认证token、签名...
      */
-    private final MyAuthenticationFilter myAuthenticationFilter;
+    //private final MyAuthenticationFilter myAuthenticationFilter;
     /**
      * 访问权限认证异常处理
      */
@@ -62,6 +63,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
      */
     private final UrlAccessDeniedHandler urlAccessDeniedHandler;
 
+    @Resource
+    private UserMapper userMapper;
+
     //url权限相关 - ========================================================================================
 
     public SecurityConfig(MyAuthenticationFilter myAuthenticationFilter,
@@ -70,7 +74,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                           UrlFilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource,
                           UrlAccessDeniedHandler urlAccessDeniedHandler,
                           UrlAccessDecisionManager urlAccessDecisionManager) {
-        this.myAuthenticationFilter = myAuthenticationFilter;
+        //this.myAuthenticationFilter = myAuthenticationFilter;
         this.adminAuthenticationEntryPoint = adminAuthenticationEntryPoint;
         this.adminAuthenticationProcessingFilter = adminAuthenticationProcessingFilter;
         this.urlFilterInvocationSecurityMetadataSource = urlFilterInvocationSecurityMetadataSource;
@@ -91,12 +95,12 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 // 需要验证了的用户才能访问
                 =  httpSecurity.authorizeRequests()
                   // 测试用资源，需要验证了的用户才能访问
-                  .antMatchers("/tasks/**").authenticated()
+                  .antMatchers("/**").authenticated()
                   .anyRequest().permitAll();
 
         httpSecurity.cors().and().csrf().disable()
                 // 其他都放行了
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+                .addFilter(new JWTAuthenticationFilter(authenticationManager(),userMapper))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
                 .exceptionHandling().authenticationEntryPoint(adminAuthenticationEntryPoint)
                 .and()

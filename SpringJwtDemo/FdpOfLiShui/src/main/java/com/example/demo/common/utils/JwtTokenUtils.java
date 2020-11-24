@@ -55,6 +55,16 @@ public class JwtTokenUtils {
         return getTokenBody(token).getSubject();
     }
 
+    // 从token中获取用户角色
+    public static List<String> getUserRole(String token){
+        Object roles = getTokenBody(token).get(RoleLoginName);
+        if(roles != null)
+        {
+            return  (List<String>) roles;
+        }
+        return null;
+    }
+
     // 是否已过期
     public static boolean isExpiration(String token){
         return getTokenBody(token).getExpiration().before(new Date());

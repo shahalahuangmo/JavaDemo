@@ -39,6 +39,6 @@ public interface UserRoleMapper {
      * @param userId
      * @return
      */
-    @Select("select a.`id`,a.`name`,a.`orderId`,a.`displayName` from role a  inner join  userRole b on a.id = b.roleId where b.userId = #{userId}")
+    @Select("select a.`id`,a.`name`,a.`roleCode`,a.`orderId`,a.`displayName` from role a  inner join  userRole b on a.id = b.roleId where b.userId = #{userId}")
     List<Role> getRoleByUserId(long userId);
 }

@@ -52,11 +52,11 @@ public class SecurityUser implements UserDetails {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         if (!CollectionUtils.isEmpty(this.roleList)) {
             for (Role role : this.roleList) {
-                SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role.getName());
+                SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role.getRoleCode());
                 authorities.add(simpleGrantedAuthority);
             }
         }
-        return null;
+        return authorities;
     }
 
     @Override

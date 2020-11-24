@@ -1,5 +1,6 @@
 package com.example.demo.config.security.login;
 
+import com.example.demo.common.utils.JwtTokenUtils;
 import com.example.demo.common.utils.PasswordUtils;
 import com.example.demo.config.security.dto.SecurityUser;
 import com.example.demo.config.security.service.CustomUserDetailsService;
@@ -44,7 +45,8 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
 
         // 前后端分离情况下 处理逻辑...
         // 更新登录令牌
-        String token = PasswordUtils.encodePassword(System.currentTimeMillis() + userInfo.getCurrentUserInfo().getPassword(), userInfo.getCurrentUserInfo().getUsername());
+        String token = JwtTokenUtils.createToken(userInfo.getUsername(),userInfo.getRoleList(), false);
+        //String token = PasswordUtils.encodePassword(System.currentTimeMillis() + userInfo.getCurrentUserInfo().getPassword(), userInfo.getCurrentUserInfo().getUsername());
         User user = userMapper.getUserById(userInfo.getCurrentUserInfo().getId());
         user.setToken(token);
         userMapper.updateUserToken(user.getId(),user.getToken());

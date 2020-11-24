@@ -25,6 +25,18 @@ public class PasswordUtils {
     }
 
     /**
+     * 校验密码是否一致
+     *
+     * @param password: 前端传过来的密码
+     * @param hashedPassword：数据库中储存加密过后的密码
+     * @return
+     */
+    public static boolean isValidPassword(String password, String hashedPassword) {
+        return hashedPassword.equalsIgnoreCase(password);
+    }
+
+
+    /**
      * 通过SHA1对密码进行编码
      *
      * @param password：密码
