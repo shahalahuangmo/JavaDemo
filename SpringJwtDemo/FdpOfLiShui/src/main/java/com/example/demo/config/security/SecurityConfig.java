@@ -8,8 +8,11 @@ import com.example.demo.config.security.login.AdminAuthenticationEntryPoint;
 import com.example.demo.config.security.url.UrlAccessDecisionManager;
 import com.example.demo.config.security.url.UrlAccessDeniedHandler;
 import com.example.demo.config.security.url.UrlFilterInvocationSecurityMetadataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,11 +23,14 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
+import javax.annotation.Resource;
+
 /**
  * 核心配置类
  */
 @Configuration
 @EnableWebSecurity
+// 至于为什么要配置这个，嘿嘿，卖个关子
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     /**
@@ -58,35 +64,20 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     //url权限相关 - ========================================================================================
 
-    //JWT鉴权相关 - ========================================================================================
-    /**
-     * JWT验证Filter
-     */
-    private final JWTAuthenticationFilter jwtAuthenticationFilter;
-    /**
-     * JWT鉴权Filter
-     */
-    private final JWTAuthorizationFilter jwtAuthorizationFilter;
-
-    //JWT鉴权相关 - ========================================================================================
-
     public SecurityConfig(MyAuthenticationFilter myAuthenticationFilter,
                           AdminAuthenticationEntryPoint adminAuthenticationEntryPoint,
                           AdminAuthenticationProcessingFilter adminAuthenticationProcessingFilter,
                           UrlFilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource,
                           UrlAccessDeniedHandler urlAccessDeniedHandler,
-                          UrlAccessDecisionManager urlAccessDecisionManager,
-                          JWTAuthenticationFilter jwtAuthenticationFilter,
-                          JWTAuthorizationFilter jwtAuthorizationFilter) {
+                          UrlAccessDecisionManager urlAccessDecisionManager) {
         this.myAuthenticationFilter = myAuthenticationFilter;
         this.adminAuthenticationEntryPoint = adminAuthenticationEntryPoint;
         this.adminAuthenticationProcessingFilter = adminAuthenticationProcessingFilter;
         this.urlFilterInvocationSecurityMetadataSource = urlFilterInvocationSecurityMetadataSource;
         this.urlAccessDeniedHandler = urlAccessDeniedHandler;
         this.urlAccessDecisionManager = urlAccessDecisionManager;
-        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-        this.jwtAuthorizationFilter = jwtAuthorizationFilter;
     }
+
 
     /**
      * 权限配置
@@ -98,6 +89,32 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry expressionInterceptUrlRegistry
                 // 需要验证了的用户才能访问
+                =  httpSecurity.authorizeRequests()
+                  // 测试用资源，需要验证了的用户才能访问
+                  .antMatchers("/tasks/**").authenticated()
+                  .anyRequest().permitAll();
+
+        httpSecurity.cors().and().csrf().disable()
+                // 其他都放行了
+                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                .exceptionHandling().authenticationEntryPoint(adminAuthenticationEntryPoint)
+                .and()
+                .exceptionHandling().accessDeniedHandler(urlAccessDeniedHandler)
+                .and()
+                // 不需要session
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+          expressionInterceptUrlRegistry.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+            @Override
+            public <O extends FilterSecurityInterceptor> O postProcess(O o) {
+                o.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource);
+                o.setAccessDecisionManager(urlAccessDecisionManager);
+                return o;
+            }
+          });
+      /*  ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry expressionInterceptUrlRegistry
+                // 需要验证了的用户才能访问
                 = httpSecurity.antMatcher("/**").authorizeRequests();
 
         // 禁用CSRF 开启跨域
@@ -106,14 +123,14 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
         httpSecurity.exceptionHandling().authenticationEntryPoint(adminAuthenticationEntryPoint);
         // 登录过后访问无权限的接口时自定义403响应内容
         httpSecurity.exceptionHandling().accessDeniedHandler(urlAccessDeniedHandler);
-        // JWT验证Filter
-        httpSecurity .addFilter(jwtAuthenticationFilter);
+         // JWT验证Filter
+        httpSecurity .addFilter(new JWTAuthenticationFilter(authenticationManager()));
         // JWT鉴权Filter
-        httpSecurity .addFilter(jwtAuthorizationFilter);
+        httpSecurity .addFilter(new JWTAuthorizationFilter(authenticationManager()));
         // 不需要session
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        // url权限认证处理
+      // url权限认证处理
         expressionInterceptUrlRegistry.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
             @Override
             public <O extends FilterSecurityInterceptor> O postProcess(O o) {
@@ -121,7 +138,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 o.setAccessDecisionManager(urlAccessDecisionManager);
                 return o;
             }
-        });
+        });*/
+
     }
 
     /**

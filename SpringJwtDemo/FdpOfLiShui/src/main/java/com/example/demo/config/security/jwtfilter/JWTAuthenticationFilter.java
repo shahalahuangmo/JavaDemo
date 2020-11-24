@@ -8,12 +8,13 @@ import com.example.demo.config.security.dto.SecurityUser;
 import com.example.demo.system.mapper.basemapper.UserMapper;
 import com.example.demo.system.model.domain.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
@@ -28,14 +29,17 @@ import java.util.List;
 /**
  *  JWT 验证Filter
  */
-@Component
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private final AuthenticationManager authenticationManager;
+    @Resource
+    private UserMapper userMapper;
+
+    private  AuthenticationManager authenticationManager;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
+
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
@@ -66,14 +70,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         System.out.println("jwtUser:" + jwtUser.toString());
         String token = JwtTokenUtils.createToken(jwtUser.getUsername(),jwtUser.getRoleList(), false);
 
-       /*  List<User> userList = userMapper.getUserByUserName(jwtUser.getUsername());
+        List<User> userList = userMapper.getUserByUserName(jwtUser.getUsername());
         User user;
         if(!CollectionUtils.isEmpty(userList))
         {
             user = userList.get(0);
             user.setToken(token);
             userMapper.updateUserToken(user.getId(),token);
-        }*/
+        }
 
         // 返回创建成功的token
         // 但是这里创建的token只是单纯的token
