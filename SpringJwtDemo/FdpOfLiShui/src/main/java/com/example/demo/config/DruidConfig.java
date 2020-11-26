@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -20,10 +22,11 @@ import java.sql.SQLException;
  * Druid 配置类
  */
 @Configuration
+@ComponentScan(basePackages = {"com.gitee.sunchenbin.mybatis.actable.manager.*"})//固定的包
 public class DruidConfig {
     private Logger logger = LoggerFactory.getLogger(DruidConfig.class);
     //
-    static final String MAPPER_LOCATION = "classpath*:com/example/demo/mapper/*.xml";
+    static final String MAPPER_LOCATION = "classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml";
 
     @Value("${spring.datasource.url}")
     private String url;
@@ -108,7 +111,7 @@ public class DruidConfig {
     public SqlSessionFactory springSqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) throws Exception {
         final SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
-        sessionFactoryBean.setTypeAliasesPackage("com.example.demo.model");
+        sessionFactoryBean.setTypeAliasesPackage("com.example.demo.model.*");
         sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(DruidConfig.MAPPER_LOCATION));
         return sessionFactoryBean.getObject();
     }

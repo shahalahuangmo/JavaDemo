@@ -23,6 +23,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.annotation.Resource;
 
@@ -34,21 +36,6 @@ import javax.annotation.Resource;
 // 至于为什么要配置这个，嘿嘿，卖个关子
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
-    /**
-     * 访问鉴权 - 认证token、签名...
-     */
-    //private final MyAuthenticationFilter myAuthenticationFilter;
-    /**
-     * 访问权限认证异常处理
-     */
-    private final AdminAuthenticationEntryPoint adminAuthenticationEntryPoint;
-    /**
-     * 用户密码校验过滤器
-     */
-    private final AdminAuthenticationProcessingFilter adminAuthenticationProcessingFilter;
-
-    // 上面是登录认证相关
-
     //url权限相关 - ========================================================================================
     /**
      * 获取访问url所需要的角色信息
@@ -68,15 +55,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     //url权限相关 - ========================================================================================
 
-    public SecurityConfig(MyAuthenticationFilter myAuthenticationFilter,
-                          AdminAuthenticationEntryPoint adminAuthenticationEntryPoint,
-                          AdminAuthenticationProcessingFilter adminAuthenticationProcessingFilter,
-                          UrlFilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource,
+    public SecurityConfig(UrlFilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource,
                           UrlAccessDeniedHandler urlAccessDeniedHandler,
                           UrlAccessDecisionManager urlAccessDecisionManager) {
-        //this.myAuthenticationFilter = myAuthenticationFilter;
-        this.adminAuthenticationEntryPoint = adminAuthenticationEntryPoint;
-        this.adminAuthenticationProcessingFilter = adminAuthenticationProcessingFilter;
         this.urlFilterInvocationSecurityMetadataSource = urlFilterInvocationSecurityMetadataSource;
         this.urlAccessDeniedHandler = urlAccessDeniedHandler;
         this.urlAccessDecisionManager = urlAccessDecisionManager;
@@ -92,49 +73,14 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     protected  void configure(HttpSecurity httpSecurity) throws  Exception
     {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry expressionInterceptUrlRegistry
-                // 需要验证了的用户才能访问
-                =  httpSecurity.authorizeRequests()
-                  // 测试用资源，需要验证了的用户才能访问
-                  .antMatchers("/**").authenticated()
-                  .anyRequest().permitAll();
-
-        httpSecurity.cors().and().csrf().disable()
-                // 其他都放行了
-                .addFilter(new JWTAuthenticationFilter(authenticationManager(),userMapper))
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
-                .exceptionHandling().authenticationEntryPoint(adminAuthenticationEntryPoint)
-                .and()
-                .exceptionHandling().accessDeniedHandler(urlAccessDeniedHandler)
-                .and()
-                // 不需要session
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-          expressionInterceptUrlRegistry.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-            @Override
-            public <O extends FilterSecurityInterceptor> O postProcess(O o) {
-                o.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource);
-                o.setAccessDecisionManager(urlAccessDecisionManager);
-                return o;
-            }
-          });
-      /*  ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry expressionInterceptUrlRegistry
-                // 需要验证了的用户才能访问
-                = httpSecurity.antMatcher("/**").authorizeRequests();
-
+                = httpSecurity.antMatcher("/**").authorizeRequests(); //需要验证了的用户才能访问
         // 禁用CSRF 开启跨域
         httpSecurity.csrf().disable().cors();
-        // 未登录认证异常
-        httpSecurity.exceptionHandling().authenticationEntryPoint(adminAuthenticationEntryPoint);
-        // 登录过后访问无权限的接口时自定义403响应内容
-        httpSecurity.exceptionHandling().accessDeniedHandler(urlAccessDeniedHandler);
          // JWT验证Filter
-        httpSecurity .addFilter(new JWTAuthenticationFilter(authenticationManager()));
+        httpSecurity .addFilter(new JWTAuthenticationFilter(authenticationManager(),userMapper));
         // JWT鉴权Filter
         httpSecurity .addFilter(new JWTAuthorizationFilter(authenticationManager()));
-        // 不需要session
-        httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-      // url权限认证处理
+        // url权限认证处理
         expressionInterceptUrlRegistry.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
             @Override
             public <O extends FilterSecurityInterceptor> O postProcess(O o) {
@@ -142,8 +88,26 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 o.setAccessDecisionManager(urlAccessDecisionManager);
                 return o;
             }
-        });*/
+        });
 
+        // 不需要session
+        httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // 标识只能在 服务器本地ip[127.0.0.1或localhost] 访问 `/home` 这个接口，其他ip地址无法访问
+        expressionInterceptUrlRegistry.antMatchers("/**").hasIpAddress("127.0.0.1");
+        // 允许匿名的url - 可理解为放行接口 - 除配置文件忽略url以外，其它所有请求都需经过认证和授权
+        /*for (String url : myProperties.getAuth().getIgnoreUrls()) {
+            expressionInterceptUrlRegistry.antMatchers(url).permitAll();
+        }*/
+
+        //        registry.antMatchers("/**").access("hasAuthority('admin')");
+        // OPTIONS(选项)：查找适用于一个特定网址资源的通讯选择。 在不需执行具体的涉及数据传输的动作情况下， 允许客户端来确定与资源相关的选项以及 / 或者要求， 或是一个服务器的性能
+        expressionInterceptUrlRegistry.antMatchers(HttpMethod.OPTIONS, "/**").denyAll();
+        // 自动登录 - cookie储存方式
+        expressionInterceptUrlRegistry.and().rememberMe();
+        // 其余所有请求都需要认证
+        expressionInterceptUrlRegistry.anyRequest().authenticated();
+        // 防止iframe 造成跨域
+        expressionInterceptUrlRegistry.and().headers().frameOptions().disable();
     }
 
     /**

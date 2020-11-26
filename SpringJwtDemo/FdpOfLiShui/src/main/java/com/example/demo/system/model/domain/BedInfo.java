@@ -7,30 +7,19 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
 
-/**
- * 访问路径
- */
 @Data
-@Table(name = "accessPath")
-public class AccessPath  extends BaseOrderEntity {
+@Table(name = "bedInfo")
+public class BedInfo  extends BaseOrderEntity {
     /**
      * 访问名称
      */
     @Column(name = "accessName",type = MySqlTypeConstant.VARCHAR,length = 500)
     @IsNotNull
-    private String accessName;
-
-    /**
-     * 访问路径
-     */
-    @Column(name = "accessPath",type = MySqlTypeConstant.VARCHAR,length = 2000)
-    @IsNotNull
-    private String accessPath;
+    private String bedName;
 
     /**
      * 描述
      */
     @Column(name = "displayName",type = MySqlTypeConstant.VARCHAR,length = 2000)
     private String displayName;
-
 }
