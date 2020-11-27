@@ -1,7 +1,6 @@
 package com.example.demo.system.mapper.basemapper;
 
-import cn.hutool.system.UserInfo;
-import com.example.demo.system.model.domain.User;
+import com.example.demo.system.model.domain.system.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;

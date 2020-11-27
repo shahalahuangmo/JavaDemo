@@ -1,6 +1,6 @@
 package com.example.demo.system.mapper.basemapper;
 
-import com.example.demo.system.model.domain.Function;
+import com.example.demo.system.model.domain.system.Function;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;

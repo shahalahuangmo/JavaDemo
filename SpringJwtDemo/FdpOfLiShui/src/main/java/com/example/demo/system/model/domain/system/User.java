@@ -1,4 +1,4 @@
-package com.example.demo.system.model.domain;
+package com.example.demo.system.model.domain.system;
 
 import com.example.demo.system.common.BaseOrderEntity;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;

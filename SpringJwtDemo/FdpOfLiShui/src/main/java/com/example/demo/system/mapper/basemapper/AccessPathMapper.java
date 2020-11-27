@@ -1,6 +1,6 @@
 package com.example.demo.system.mapper.basemapper;
 
-import com.example.demo.system.model.domain.AccessPath;
+import com.example.demo.system.model.domain.system.AccessPath;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;

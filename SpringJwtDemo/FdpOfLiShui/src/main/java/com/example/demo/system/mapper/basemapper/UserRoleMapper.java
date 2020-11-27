@@ -1,7 +1,7 @@
 package com.example.demo.system.mapper.basemapper;
 
-import com.example.demo.system.model.domain.Role;
-import com.example.demo.system.model.entity.UserRole;
+import com.example.demo.system.model.domain.system.Role;
+import com.example.demo.system.model.entity.system.UserRole;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;

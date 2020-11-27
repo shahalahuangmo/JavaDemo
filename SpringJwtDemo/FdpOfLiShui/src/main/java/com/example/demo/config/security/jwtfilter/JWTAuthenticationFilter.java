@@ -7,7 +7,7 @@ import com.example.demo.common.utils.PasswordUtils;
 import com.example.demo.common.utils.ResponseUtils;
 import com.example.demo.config.security.dto.SecurityUser;
 import com.example.demo.system.mapper.basemapper.UserMapper;
-import com.example.demo.system.model.domain.User;
+import com.example.demo.system.model.domain.system.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

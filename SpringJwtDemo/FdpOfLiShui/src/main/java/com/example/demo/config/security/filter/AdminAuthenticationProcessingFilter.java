@@ -6,7 +6,7 @@ import com.example.demo.config.Constants;
 import com.example.demo.config.security.login.AdminAuthenticationFailureHandler;
 import com.example.demo.config.security.login.AdminAuthenticationSuccessHandler;
 import com.example.demo.config.security.login.CusAuthenticationManager;
-import com.example.demo.system.model.domain.User;
+import com.example.demo.system.model.domain.system.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

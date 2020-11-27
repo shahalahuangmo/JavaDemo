@@ -1,4 +1,4 @@
-package com.example.demo.system.model.entity;
+package com.example.demo.system.model.entity.system;
 
 import com.example.demo.system.common.BaseEntity;
 import com.example.demo.system.common.BaseOrderEntity;
@@ -9,17 +9,11 @@ import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
 
 /**
- * 用户角色
+ * 角色功能权限
  */
 @Data
-@Table(name = "userRole")
-public class UserRole extends BaseOrderEntity {
-    /**
-     * 用户Id
-     */
-    @Column(name = "roleId",type = MySqlTypeConstant.BIGINT)
-    @IsNotNull
-    private long userId;
+@Table(name = "roleFunctionPermission")
+public class RoleFunctionPermission extends BaseOrderEntity {
 
     /**
      * 角色Id
@@ -27,4 +21,11 @@ public class UserRole extends BaseOrderEntity {
     @Column(name = "roleId",type = MySqlTypeConstant.BIGINT)
     @IsNotNull
     private long roleId;
+
+    /**
+     * 功能编码
+     */
+    @Column(name = "roleId",type = MySqlTypeConstant.BIGINT)
+    @IsNotNull
+    private String functionCode;
 }

@@ -1,14 +1,11 @@
 package com.example.demo.common.utils;
 
-import com.example.demo.system.model.domain.Role;
+import com.example.demo.system.model.domain.system.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 

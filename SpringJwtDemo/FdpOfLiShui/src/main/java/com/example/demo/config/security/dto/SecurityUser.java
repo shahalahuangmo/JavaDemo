@@ -1,7 +1,7 @@
 package com.example.demo.config.security.dto;
 
-import com.example.demo.system.model.domain.Role;
-import com.example.demo.system.model.domain.User;
+import com.example.demo.system.model.domain.system.Role;
+import com.example.demo.system.model.domain.system.User;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;

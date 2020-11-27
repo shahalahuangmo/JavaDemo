@@ -8,8 +8,8 @@ import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 public class BaseEntity  extends BaseModel {
 
     private static final long serialVersionUID = 5199200306752426433L;

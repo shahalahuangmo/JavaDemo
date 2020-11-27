@@ -6,8 +6,8 @@ import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 public class BaseOrderEntity extends BaseEntity {
     /**
      * 序号

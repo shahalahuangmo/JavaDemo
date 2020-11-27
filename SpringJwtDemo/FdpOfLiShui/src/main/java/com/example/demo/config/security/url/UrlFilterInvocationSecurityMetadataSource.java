@@ -2,7 +2,7 @@ package com.example.demo.config.security.url;
 
 import com.example.demo.config.Constants;
 import com.example.demo.system.mapper.basemapper.RoleMapper;
-import com.example.demo.system.model.domain.Role;
+import com.example.demo.system.model.domain.system.Role;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;

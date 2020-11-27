@@ -1,6 +1,6 @@
 package com.example.demo.system.mapper.basemapper;
 
-import com.example.demo.system.model.entity.RoleFunctionPermission;
+import com.example.demo.system.model.entity.system.RoleFunctionPermission;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;

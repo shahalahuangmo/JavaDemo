@@ -1,6 +1,6 @@
 package com.example.demo.system.mapper.basemapper;
 
-import com.example.demo.system.model.entity.RoleAccessPathPermission;
+import com.example.demo.system.model.entity.system.RoleAccessPathPermission;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;

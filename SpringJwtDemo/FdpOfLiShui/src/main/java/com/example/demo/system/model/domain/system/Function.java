@@ -1,4 +1,4 @@
-package com.example.demo.system.model.domain;
+package com.example.demo.system.model.domain.system;
 
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsNotNull;

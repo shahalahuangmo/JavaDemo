@@ -5,7 +5,7 @@ import com.example.demo.common.utils.PasswordUtils;
 import com.example.demo.config.security.dto.SecurityUser;
 import com.example.demo.config.security.service.CustomUserDetailsService;
 import com.example.demo.system.mapper.basemapper.UserMapper;
-import com.example.demo.system.model.domain.User;
+import com.example.demo.system.model.domain.system.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

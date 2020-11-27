@@ -3,7 +3,7 @@ package com.example.demo.config.security.login;
 import com.example.demo.common.dto.output.ApiResult;
 import com.example.demo.common.utils.ResponseUtils;
 import com.example.demo.config.security.dto.SecurityUser;
-import com.example.demo.system.model.domain.User;
+import com.example.demo.system.model.domain.system.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
