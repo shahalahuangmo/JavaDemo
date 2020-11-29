@@ -18,7 +18,7 @@ public class Floor extends BaseOrderEntity {
      */
     @Column(name = "buildingId", type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long buildingId;
+    private Long buildingId;
 
     /**
      * 楼层名称

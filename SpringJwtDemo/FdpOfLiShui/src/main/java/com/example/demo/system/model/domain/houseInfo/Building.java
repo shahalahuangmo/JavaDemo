@@ -18,7 +18,7 @@ public class Building extends BaseOrderEntity {
      */
     @Column(name = "dependentInstitutionId", type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long dependentInstitutionId;
+    private Long dependentInstitutionId;
 
     /**
      * 楼栋名称

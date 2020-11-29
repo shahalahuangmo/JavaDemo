@@ -19,7 +19,7 @@ public class BedInfo extends BaseOrderEntity {
      */
     @Column(name = "roomId", type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long roomId;
+    private Long roomId;
 
     /**
      * 床位名称

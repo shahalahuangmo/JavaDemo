@@ -1,6 +1,5 @@
 package com.example.demo.system.model.entity.system;
 
-import com.example.demo.system.common.BaseEntity;
 import com.example.demo.system.common.BaseOrderEntity;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsNotNull;
@@ -20,12 +19,12 @@ public class RoleFunctionPermission extends BaseOrderEntity {
      */
     @Column(name = "roleId",type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long roleId;
+    private Long roleId;
 
     /**
      * 功能编码
      */
-    @Column(name = "roleId",type = MySqlTypeConstant.BIGINT)
+    @Column(name = "functionCode",type = MySqlTypeConstant.BIGINT)
     @IsNotNull
     private String functionCode;
 }

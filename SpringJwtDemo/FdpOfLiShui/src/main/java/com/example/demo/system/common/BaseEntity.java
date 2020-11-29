@@ -20,5 +20,5 @@ public class BaseEntity  extends BaseModel {
     @Column(name = "id",type = MySqlTypeConstant.BIGINT)
     @IsKey
     @IsAutoIncrement
-    private long id;
+    private Long id;
 }

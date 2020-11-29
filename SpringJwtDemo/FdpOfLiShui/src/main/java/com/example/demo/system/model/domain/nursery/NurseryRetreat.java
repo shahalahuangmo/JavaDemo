@@ -21,7 +21,7 @@ public class NurseryRetreat extends FuLLBaseDateEntity {
      */
     @Column(name = "entrepreneurId", type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long entrepreneurId;
+    private Long entrepreneurId;
 
     /**
      * 退住办理人

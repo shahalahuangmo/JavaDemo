@@ -1,6 +1,9 @@
-package com.example.demo.system.mapper.basemapper;
+package com.example.demo.system.mapper.systemmapper;
 
+import com.example.demo.dynamicmapper.BaseMapper;
 import com.example.demo.system.model.domain.system.Role;
+import com.example.demo.system.model.domain.system.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -8,7 +11,7 @@ import java.util.List;
 /**
  *  系统角色 Mapper 接口
  */
-public interface RoleMapper {
+public interface RoleMapper  extends BaseMapper<Role> {
     /**
      * 根据角色Id获取角色信息
      * @param id

@@ -18,7 +18,7 @@ public class FamilyMember extends BaseOrderEntity {
      */
     @Column(name = "personId", type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long personId;
+    private Long personId;
 
     /**
      *  姓名

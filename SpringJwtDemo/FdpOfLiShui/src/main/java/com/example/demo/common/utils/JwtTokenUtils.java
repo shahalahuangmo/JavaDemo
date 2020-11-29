@@ -4,6 +4,7 @@ import com.example.demo.system.model.domain.system.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +26,7 @@ public class JwtTokenUtils {
     private static final long EXPIRATION_REMEMBER = 604800L;
 
     // 创建token
-    public static String createToken(String username, List<Role> roles, boolean isRememberMe) {
+    public static String createToken(String username, List<Role> roles,String userId, boolean isRememberMe) {
         long expiration = isRememberMe ? EXPIRATION_REMEMBER : EXPIRATION;
         List<String> roleList = new ArrayList<>();
         for (Role role: roles ) {
@@ -39,6 +40,7 @@ public class JwtTokenUtils {
                 .setIssuer(ISS)
                 // 用户角色
                 .claim(RoleLoginName,roleList)
+                .setId(userId)
                 // 主题 - 存用户名
                 .setSubject(username)
                 .setIssuedAt(new Date())
@@ -58,6 +60,16 @@ public class JwtTokenUtils {
         if(roles != null)
         {
             return  (List<String>) roles;
+        }
+        return null;
+    }
+
+    // 从token中获取用户Id
+    public static Long getUserId(String token){
+        String userId = getTokenBody(token).getId();
+        if(!StringUtils.isEmpty(userId))
+        {
+            return  Long.valueOf(userId);
         }
         return null;
     }

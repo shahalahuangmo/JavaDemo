@@ -4,9 +4,11 @@ import com.example.demo.common.utils.JwtTokenUtils;
 import com.example.demo.common.utils.PasswordUtils;
 import com.example.demo.config.security.dto.SecurityUser;
 import com.example.demo.config.security.service.CustomUserDetailsService;
-import com.example.demo.system.mapper.basemapper.UserMapper;
+import com.example.demo.system.mapper.systemmapper.UserMapper;
 import com.example.demo.system.model.domain.system.User;
+import com.gitee.sunchenbin.mybatis.actable.manager.common.BaseCRUDManager;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,6 +31,9 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
     @Resource
     private UserMapper userMapper;
 
+    @Resource
+    private BaseCRUDManager baseCRUDManager;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
@@ -45,9 +50,9 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
 
         // 前后端分离情况下 处理逻辑...
         // 更新登录令牌
-        String token = JwtTokenUtils.createToken(userInfo.getUsername(),userInfo.getRoleList(), false);
-        //String token = PasswordUtils.encodePassword(System.currentTimeMillis() + userInfo.getCurrentUserInfo().getPassword(), userInfo.getCurrentUserInfo().getUsername());
-        User user = userMapper.getUserById(userInfo.getCurrentUserInfo().getId());
+        String token = JwtTokenUtils.createToken(userInfo.getUsername(),userInfo.getRoleList(),userInfo.getCurrentUserInfo().getId().toString(), false);
+        Long userId =userInfo.getCurrentUserInfo().getId();
+        User user = userMapper.selectByPrimaryKey(User.class,userId);
         user.setToken(token);
         userMapper.updateUserToken(user.getId(),user.getToken());
         userInfo.getCurrentUserInfo().setToken(token);

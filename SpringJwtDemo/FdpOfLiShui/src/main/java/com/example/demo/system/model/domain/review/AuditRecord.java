@@ -1,4 +1,4 @@
-package com.example.demo.system.model.domain.Review;
+package com.example.demo.system.model.domain.review;
 
 import com.example.demo.system.common.FuLLBaseDateEntity;
 import com.example.demo.system.model.value.AuditProjectType;
@@ -23,7 +23,7 @@ public class AuditRecord extends FuLLBaseDateEntity {
      */
     @Column(name = "projectId", type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long projectId;
+    private Long projectId;
 
     /**
      * 审核项目类型

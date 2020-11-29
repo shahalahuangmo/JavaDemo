@@ -22,13 +22,13 @@ public class FuLLBaseDateEntity extends BaseDateEntity {
      */
     @Column(name = "creator",type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long creator;
+    private Long creator;
 
     /**
      * 删除人
      */
     @Column(name = "deleter",type = MySqlTypeConstant.BIGINT)
-    private long deleter;
+    private Long deleter;
 
     /**
      * 是否删除

@@ -17,14 +17,14 @@ public class UserRole extends BaseOrderEntity {
     /**
      * 用户Id
      */
-    @Column(name = "roleId",type = MySqlTypeConstant.BIGINT)
+    @Column(name = "userId",type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long userId;
+    private Long userId;
 
     /**
      * 角色Id
      */
     @Column(name = "roleId",type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long roleId;
+    private Long roleId;
 }

@@ -19,7 +19,7 @@ public class Person extends FuLLBaseDateEntity {
      * 入托申请Id
      */
     @Column(name = "nurseryApplicationId", type = MySqlTypeConstant.BIGINT)
-    private long nurseryApplicationId;
+    private Long nurseryApplicationId;
 
     /**
      * 入托人Id

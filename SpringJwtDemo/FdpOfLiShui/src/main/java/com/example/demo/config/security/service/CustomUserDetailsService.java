@@ -1,8 +1,8 @@
 package com.example.demo.config.security.service;
 
 import com.example.demo.config.security.dto.SecurityUser;
-import com.example.demo.system.mapper.basemapper.UserMapper;
-import com.example.demo.system.mapper.basemapper.UserRoleMapper;
+import com.example.demo.system.mapper.systemmapper.UserMapper;
+import com.example.demo.system.mapper.systemmapper.UserRoleMapper;
 import com.example.demo.system.model.domain.system.Role;
 import com.example.demo.system.model.domain.system.User;
 import org.springframework.security.core.userdetails.UserDetails;

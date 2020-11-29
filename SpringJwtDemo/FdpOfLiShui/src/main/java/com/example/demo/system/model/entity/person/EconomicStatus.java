@@ -19,7 +19,7 @@ public class EconomicStatus extends BaseOrderEntity {
      */
     @Column(name = "personId", type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long  personId ;
+    private Long  personId ;
 
     /**
      * 收入来源

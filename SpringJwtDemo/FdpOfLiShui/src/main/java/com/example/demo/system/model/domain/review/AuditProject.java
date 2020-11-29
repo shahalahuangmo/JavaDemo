@@ -1,4 +1,4 @@
-package com.example.demo.system.model.domain.Review;
+package com.example.demo.system.model.domain.review;
 
 import com.example.demo.system.common.FuLLBaseDateEntity;
 import com.example.demo.system.model.value.AuditProjectType;

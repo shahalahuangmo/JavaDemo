@@ -1,8 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.common.dto.input.UserInfo;
+import com.example.demo.common.utils.JwtTokenUtils;
 import com.example.demo.common.utils.PasswordUtils;
-import com.example.demo.system.mapper.basemapper.UserMapper;
+import com.example.demo.system.mapper.systemmapper.UserMapper;
 import com.example.demo.system.model.domain.system.User;
 import com.sun.istack.internal.NotNull;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,7 +36,10 @@ public class UserService {
         user.setPhoneNumber(userInfo.getPhoneNumber());
         user.setCreateTime(new Date(System.currentTimeMillis()));
         user.setDelete(false);
-        user.setOrderId(0);
+        user.setDeleteTime(null);
+        user.setDeleter(null);
+        Long creator = JwtTokenUtils.getUserId(userInfo.getToken());
+        user.setCreator(creator);
         return UserMapper.insertUser(user);
     }
 

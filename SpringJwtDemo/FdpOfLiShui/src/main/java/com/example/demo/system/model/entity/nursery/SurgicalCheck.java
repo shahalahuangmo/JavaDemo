@@ -7,6 +7,8 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * 外科检查
  */
@@ -18,25 +20,25 @@ public class SurgicalCheck extends BaseDateEntity {
      */
     @Column(name = "entrepreneurId", type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long entrepreneurId;
+    private Long entrepreneurId;
 
     /**
      * 血糖值 默认单位（mmol/L）
      */
-    @Column(name = "bloodGlucose", type = MySqlTypeConstant.DOUBLE)
-    private Double bloodGlucose ;
+    @Column(name = "bloodGlucose", type = MySqlTypeConstant.DECIMAL,length = 10,decimalLength = 2)
+    private BigDecimal bloodGlucose ;
 
     /**
      * 收缩压 单位（mmHg）
      */
-    @Column(name = "systolicBloodPressure", type = MySqlTypeConstant.DOUBLE)
-    private Double systolicBloodPressure ;
+    @Column(name = "systolicBloodPressure", type = MySqlTypeConstant.DECIMAL,length = 10,decimalLength = 2)
+    private BigDecimal systolicBloodPressure ;
 
     /**
      * 舒张压 默认单位（mmHg）
      */
-    @Column(name = "diastolicBloodPressure", type = MySqlTypeConstant.DOUBLE)
-    private Double diastolicBloodPressure ;
+    @Column(name = "diastolicBloodPressure", type = MySqlTypeConstant.DECIMAL,length = 10,decimalLength = 2)
+    private BigDecimal diastolicBloodPressure ;
 
     /**
      * 本人家族过敏史

@@ -19,13 +19,13 @@ public class RoleAccessPathPermission extends BaseOrderEntity {
      */
     @Column(name = "roleId",type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long roleId;
+    private Long roleId;
 
     /**
      * 访问路径Id
      */
     @Column(name = "accessPathId",type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long accessPathId;
+    private Long accessPathId;
 
 }

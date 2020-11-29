@@ -19,7 +19,7 @@ public class SocialAssistanceSituation extends BaseOrderEntity {
      */
     @Column(name = "personId", type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long personId;
+    private Long personId;
 
     /**
      * 贫困类别

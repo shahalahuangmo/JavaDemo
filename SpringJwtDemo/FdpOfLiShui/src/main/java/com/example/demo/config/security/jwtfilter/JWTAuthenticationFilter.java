@@ -6,7 +6,7 @@ import com.example.demo.common.utils.JwtTokenUtils;
 import com.example.demo.common.utils.PasswordUtils;
 import com.example.demo.common.utils.ResponseUtils;
 import com.example.demo.config.security.dto.SecurityUser;
-import com.example.demo.system.mapper.basemapper.UserMapper;
+import com.example.demo.system.mapper.systemmapper.UserMapper;
 import com.example.demo.system.model.domain.system.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -87,7 +87,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 所以就是JwtUser啦
         SecurityUser jwtUser = (SecurityUser) authResult.getPrincipal();
         System.out.println("jwtUser:" + jwtUser.toString());
-        String token = JwtTokenUtils.createToken(jwtUser.getUsername(),jwtUser.getRoleList(), false);
+        String token = JwtTokenUtils.createToken(jwtUser.getUsername(),jwtUser.getRoleList(),jwtUser.getCurrentUserInfo().getId().toString(), false);
 
         List<User> userList = userMapper.getUserByUserName(jwtUser.getCurrentUserInfo().getUsername());
         User user;

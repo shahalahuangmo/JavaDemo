@@ -17,7 +17,7 @@ public class Role extends BaseOrderEntity
     /**
      * 角色名称
      */
-    @Column(name = "accessName",type = MySqlTypeConstant.VARCHAR,length = 255)
+    @Column(name = "name",type = MySqlTypeConstant.VARCHAR,length = 255)
     @IsNotNull
     private String name;
     /**

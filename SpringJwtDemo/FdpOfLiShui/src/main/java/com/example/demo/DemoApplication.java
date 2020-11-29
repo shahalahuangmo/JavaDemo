@@ -1,9 +1,11 @@
 package com.example.demo;
 
-import org.mybatis.spring.annotation.MapperScan;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+//这里需要使用 tk.mybatis.spring.annotation.MapperScan 替换 org.mybatis.spring.annotation.MapperScan
+import org.mybatis.spring.annotation.MapperScan;
+
 
 @SpringBootApplication
 @MapperScan("com.example.demo.system.mapper")

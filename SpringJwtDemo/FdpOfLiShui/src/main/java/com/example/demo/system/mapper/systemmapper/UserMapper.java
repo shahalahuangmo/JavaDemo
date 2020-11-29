@@ -1,5 +1,6 @@
-package com.example.demo.system.mapper.basemapper;
+package com.example.demo.system.mapper.systemmapper;
 
+import com.example.demo.dynamicmapper.BaseMapper;
 import com.example.demo.system.model.domain.system.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -10,14 +11,14 @@ import java.util.List;
 /**
  *  系统用户 Mapper 接口
  */
-public interface UserMapper {
-    /**
+public interface UserMapper extends BaseMapper<User> {
+/*    *//**
      * 获取用户通过用户Id
      * @param id 用户Id
      * @return User
      */
     @Select("select * from user where id = #{id}")
-    User getUserById(long id);
+    User getUserById(Long id);
 
     /**
      * 获取用户通过用户名
@@ -45,10 +46,11 @@ public interface UserMapper {
     User getUserByToken(String token);
 
     // 插入用户
-    @Insert("INSERT INTO `test`.`user`(`username`, `password`, `email`, `phoneNumber`, `orderId`, `token`, `createTime`, `deleteTime`, `isDelete`)" +
-            " VALUES (#{username}, #{password}, #{email},  #{phoneNumber}, #{orderId}, #{token},#{createTime}, NULL, b'0')")
+    @Insert("INSERT INTO `test`.`user`( `username`, `password`, `email`, `phoneNumber`, `token`, `createTime`, " +
+            "`deleteTime`, `isDelete`, `creator`, `deleter`)" +
+            " VALUES (#{username}, #{password}, #{email},  #{phoneNumber}, #{token},#{createTime},NULL, b'0',#{creator},NULL)")
     int insertUser(User user);
 
     @Update("update user set password = #{newPwd} where id = #{id}")
-    int updatePassword(long id, String newPwd);
+    int updatePassword(Long id, String newPwd);
 }

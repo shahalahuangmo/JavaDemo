@@ -9,6 +9,8 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * 入托登记信息
  */
@@ -19,7 +21,7 @@ public class NurseryRegistration extends FuLLBaseDateEntity {
      * 入托申请Id
      */
     @Column(name = "nurseryApplicationId", type = MySqlTypeConstant.BIGINT)
-    private long nurseryApplicationId;
+    private Long nurseryApplicationId;
 
     /**
      * 残疾证号码
@@ -72,8 +74,8 @@ public class NurseryRegistration extends FuLLBaseDateEntity {
     /**
      * 低保（元）
      */
-    @Column(name = "lowSecurity", type = MySqlTypeConstant.DOUBLE)
-    private Double lowSecurity;
+    @Column(name = "lowSecurity", type = MySqlTypeConstant.DECIMAL,length = 10,decimalLength = 2)
+    private BigDecimal lowSecurity;
 
     /**
      * 注意事项
@@ -92,7 +94,7 @@ public class NurseryRegistration extends FuLLBaseDateEntity {
      * 床位Id
      */
     @Column(name = "bedId", type = MySqlTypeConstant.BIGINT)
-    private long bedId;
+    private Long bedId;
 
     /**
      * 试住意向书
@@ -162,7 +164,7 @@ public class NurseryRegistration extends FuLLBaseDateEntity {
     /**
      * 账户金额
      */
-    @Column(name = "accountAmount", type = MySqlTypeConstant.DOUBLE)
+    @Column(name = "accountAmount", type = MySqlTypeConstant.DECIMAL,length = 10,decimalLength = 2)
     @IsNotNull
-    private Double accountAmount;
+    private BigDecimal accountAmount;
 }

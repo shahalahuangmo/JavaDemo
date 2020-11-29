@@ -1,6 +1,8 @@
-package com.example.demo.system.mapper.basemapper;
+package com.example.demo.system.mapper.systemmapper;
 
+import com.example.demo.dynamicmapper.BaseMapper;
 import com.example.demo.system.model.entity.system.RoleFunctionPermission;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
 /**
  * 角色功能权限 Mapper 接口
  */
-public interface RoleFunctionPermissionMapper {
+public interface RoleFunctionPermissionMapper extends BaseMapper<RoleFunctionPermission> {
     /**
      * 获取角色功能权限信息通过Id
      * @param id 角色功能权限Id

@@ -1,19 +1,13 @@
 package com.example.demo.config.security;
 
-import com.example.demo.config.security.filter.AdminAuthenticationProcessingFilter;
-import com.example.demo.config.security.filter.MyAuthenticationFilter;
 import com.example.demo.config.security.jwtfilter.JWTAuthenticationFilter;
 import com.example.demo.config.security.jwtfilter.JWTAuthorizationFilter;
-import com.example.demo.config.security.login.AdminAuthenticationEntryPoint;
 import com.example.demo.config.security.url.UrlAccessDecisionManager;
 import com.example.demo.config.security.url.UrlAccessDeniedHandler;
 import com.example.demo.config.security.url.UrlFilterInvocationSecurityMetadataSource;
-import com.example.demo.system.mapper.basemapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import com.example.demo.system.mapper.systemmapper.UserMapper;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,8 +17,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.annotation.Resource;
 

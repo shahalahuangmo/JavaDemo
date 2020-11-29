@@ -19,7 +19,7 @@ public class Room extends BaseOrderEntity {
      */
     @Column(name = "floorId", type = MySqlTypeConstant.BIGINT)
     @IsNotNull
-    private long floorId;
+    private Long floorId;
 
     /**
      * 房间名称
