@@ -30,7 +30,7 @@ public class UserService {
         User user = new User();
         // 加密密码
         user.setPassword(PasswordUtils.encodePassword(userInfo.getPassword(),userInfo.getUsername()));
-        user.setToken(userInfo.getPassword());
+        user.setToken(user.getPassword());
         user.setUsername(userInfo.getUsername());
         user.setEmail(userInfo.getEmail());
         user.setPhoneNumber(userInfo.getPhoneNumber());
@@ -40,7 +40,7 @@ public class UserService {
         user.setDeleter(null);
         Long creator = JwtTokenUtils.getUserId(userInfo.getToken());
         user.setCreator(creator);
-        return UserMapper.insertUser(user);
+        return UserMapper.insert(user);
     }
 
     /**

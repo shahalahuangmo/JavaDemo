@@ -2,6 +2,7 @@ package com.example.demo.dynamicmapper.update;
 
 import com.example.demo.dynamicmapper.query.BaseSelectProvider;
 import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.UpdateProvider;
 
 
 public interface BaseUpdateMapper {
@@ -11,6 +12,6 @@ public interface BaseUpdateMapper {
      * @param bean 数据对象
      * @return
      */
-    @SelectProvider(type= BaseSelectProvider.class, method="selectByPrimaryKey")
+    @UpdateProvider(type= BaseUpdateProvider.class, method="update")
     int update(Object bean);
 }

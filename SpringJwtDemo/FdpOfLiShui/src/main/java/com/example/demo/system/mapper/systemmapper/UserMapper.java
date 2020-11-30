@@ -46,9 +46,12 @@ public interface UserMapper extends BaseMapper<User> {
     User getUserByToken(String token);
 
     // 插入用户
-    @Insert("INSERT INTO `test`.`user`( `username`, `password`, `email`, `phoneNumber`, `token`, `createTime`, " +
+  /*  @Insert("INSERT INTO `test`.`user`( `username`, `password`, `email`, `phoneNumber`, `token`, `createTime`, " +
             "`deleteTime`, `isDelete`, `creator`, `deleter`)" +
-            " VALUES (#{username}, #{password}, #{email},  #{phoneNumber}, #{token},#{createTime},NULL, b'0',#{creator},NULL)")
+            " VALUES (#{username}, #{password}, #{email},  #{phoneNumber}, #{token},#{createTime},NULL, b'0',#{creator},NULL)")*/
+    @Insert("INSERT INTO user\n" +
+            " (`username`, `password`, `email`, `phonenumber`, `token`, `creator`, `isdelete`, `createtime`)\n" +
+            "VALUES (#{username}, #{password}, #{email}, #{phonenumber}, #{token}, #{creator}, #{isdelete}, #{createtime}))")
     int insertUser(User user);
 
     @Update("update user set password = #{newPwd} where id = #{id}")

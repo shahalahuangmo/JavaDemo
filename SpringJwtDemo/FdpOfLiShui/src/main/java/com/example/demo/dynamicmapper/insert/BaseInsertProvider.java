@@ -1,6 +1,7 @@
 package com.example.demo.dynamicmapper.insert;
 
 
+import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.jdbc.SQL;
 
@@ -26,9 +27,9 @@ public class BaseInsertProvider {
         while (clazz != null && clazz != Object.class) {
             for (Field field : clazz.getDeclaredFields())
             {
-                if (Modifier.isPrivate(field.getModifiers()))
+                if (Modifier.isPrivate(field.getModifiers()) && hasColumnAnnotation(field))
                 {
-                    String columnName = getColumnName(field);
+                    String columnName = field.getName();
                     if(!StringUtils.isEmpty(columnName))
                     {
                         field.setAccessible(true);

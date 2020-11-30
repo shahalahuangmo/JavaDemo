@@ -1,23 +1,17 @@
 package com.example.demo.system.model.domain.system;
 
-import com.example.demo.system.common.BaseOrderEntity;
 import com.example.demo.system.common.FuLLBaseDateEntity;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsNotNull;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
-import tk.mybatis.mapper.annotation.NameStyle;
-import tk.mybatis.mapper.code.Style;
-
-import java.util.Date;
 
 /**
  * 系统用户表
  */
 @Data
 @Table(name = "user")
-@NameStyle(Style.normal)
 public class User extends FuLLBaseDateEntity {
     /**
      * 账号

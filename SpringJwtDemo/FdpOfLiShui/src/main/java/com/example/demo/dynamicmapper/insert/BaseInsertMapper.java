@@ -1,6 +1,7 @@
 package com.example.demo.dynamicmapper.insert;
 
 import com.example.demo.dynamicmapper.query.BaseSelectProvider;
+import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.SelectProvider;
 
 
@@ -11,6 +12,6 @@ public interface BaseInsertMapper {
      * @param bean 数据对象
      * @return
      */
-    @SelectProvider(type= BaseSelectProvider.class, method="selectByPrimaryKey")
+    @InsertProvider(type= BaseInsertProvider.class, method="insert")
     int insert(Object bean);
 }
