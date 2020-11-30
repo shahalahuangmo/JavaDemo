@@ -28,15 +28,15 @@ public class BaseSelectProvider {
         while (clazz != null && clazz != Object.class) {
             for (Field field : clazz.getDeclaredFields())
             {
-                if (Modifier.isPrivate(field.getModifiers()))
+                if (Modifier.isPrivate(field.getModifiers()) && hasColumnAnnotation(field))
                 {
-                    String columnName = getColumnName(field);
+                    String columnName = field.getName();
                     if(!StringUtils.isEmpty(columnName))
                     {
                         columns.add("`" + columnName + "`");
                         if(isKey(field))
                         {
-                            primaryKey = "`" + getColumnName(field) + "`";
+                            primaryKey = "`" + columnName + "`";
                         }
                     }
                 }
@@ -67,9 +67,9 @@ public class BaseSelectProvider {
         while (clazz != null && clazz != Object.class) {
             for (Field field : clazz.getDeclaredFields())
             {
-                if (Modifier.isPrivate(field.getModifiers()))
+                if (Modifier.isPrivate(field.getModifiers()) && hasColumnAnnotation(field))
                 {
-                    String columnName = getColumnName(field);
+                    String columnName = field.getName();
                     if(!StringUtils.isEmpty(columnName))
                     {
                         columns.add("`" + columnName + "`");
