@@ -1,19 +1,16 @@
 package com.example.demo.controller;
 
-
 import com.example.demo.common.dto.input.UserInfo;
 import com.example.demo.common.utils.JwtTokenUtils;
 import com.example.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 @Slf4j
 @RestController
+@RequestMapping("/api")
 public class UserController {
 
     @Resource
