@@ -17,11 +17,6 @@ public class DemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
 
-        logger.debug("taiyonghai debug");
-        logger.info("taiyonghai info");
-        logger.error("taiyonghai error");
-        logger.warn("taiyonghai warn");
-
     }
 
 }
