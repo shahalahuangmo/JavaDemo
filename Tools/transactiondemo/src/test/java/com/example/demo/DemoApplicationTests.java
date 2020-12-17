@@ -20,19 +20,18 @@ class DemoApplicationTests {
     UserService userService;
 
     @Test
-    void transactionTest()
-    {
+    void transactionTest() throws Exception {
         User addUser = new User();
+        addUser.setId(1);
         addUser.setName("testUser2");
-        addUser.setAge(25);
+        addUser.setAge(28);
         addUser.setAddress("testUser");
 
 
         User updateUser = new User();
-        updateUser.setId(1);
-        updateUser.setName("testUser1");
-        updateUser.setAge(25);
-        updateUser.setAddress("testUser1");
+        updateUser.setName("testUser8");
+        updateUser.setAge(88);
+        updateUser.setAddress("testUser08");
 
         List<User> users = new ArrayList<>();
         users.add(addUser);
