@@ -6,22 +6,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="nativeconfigserver" />
-        <module name="eurekaclient" />
+        <module name="nativeconfigclient" />
         <module name="eurekaconsumer" />
+        <module name="zuuldemo" />
         <module name="ribbondemo" />
+        <module name="nativeconfigserver" />
         <module name="resttemplate" />
         <module name="hystrixdemo" />
-        <module name="nativeconfigclient" />
         <module name="feigndemo" />
         <module name="eurekaserver" />
-        <module name="zuuldemo" />
+        <module name="configserver" />
+        <module name="eurekaclient" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="configserver" options="-parameters" />
       <module name="eurekaclient" options="-parameters" />
       <module name="eurekaconsumer" options="-parameters" />
       <module name="eurekaserver" options="-parameters" />
