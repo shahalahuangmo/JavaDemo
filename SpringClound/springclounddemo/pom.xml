@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.example</groupId>
+    <artifactId>springclounddemo</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>eurekaserver</module>
+        <module>eurekaclient</module>
+        <module>resttemplate</module>
+        <module>eurekaconsumer</module>
+        <module>zuuldemo</module>
+        <module>ribbondemo</module>
+        <module>feigndemo</module>
+        <module>hystrixdemo</module>
+        <module>nativeconfigserver</module>
+        <module>nativeconfigclient</module>
+    </modules>
+
+    <!-- 父项目的坐标。如果项目中没有规定某个元素的值，那么父项目中的对应值即为项目的默认值。
+         坐标包括group ID，artifact ID和 version。 -->
+    <parent>
+        <!-- 被继承的父项目的构件标识符 -->
+        <groupId>org.springframework.boot</groupId>
+        <!-- 被继承的父项目的全球唯一标识符 -->
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <!-- 被继承的父项目的版本 -->
+        <version>2.3.5.RELEASE</version>
+    </parent>
+
+   <!--依赖关系-->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.16</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <!--依赖管理，用于管理spring-cloud的依赖-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

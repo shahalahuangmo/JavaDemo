@@ -1,0 +1,5 @@
+#  设置服务端口
+server:
+  port: 8070
+# 设置版本
+foo: foo version 1

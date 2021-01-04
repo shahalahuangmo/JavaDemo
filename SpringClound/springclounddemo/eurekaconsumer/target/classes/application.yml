@@ -1,0 +1,14 @@
+server:
+  # 当前服务端口
+  port: 8020
+spring:
+  application:
+    name: eureka-consumer
+eureka:
+  client:
+    # 注册中心的访问地址
+    service-url:
+      defaultZone: http://localhost:8062/eureka/
+  instance:
+    # 是否将当前服务的ip注册到 Eureka Server
+    prefer-ip-address: true

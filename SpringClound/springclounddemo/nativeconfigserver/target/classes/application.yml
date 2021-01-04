@@ -1,0 +1,15 @@
+server:
+  port: 8063
+spring:
+  application:
+    name: nativeconfigserver
+  # 配置文件的获取方式
+  profiles:
+    # 本地获取
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          # 本地配置文件存放的路径
+          search-locations: classpath:/shared
