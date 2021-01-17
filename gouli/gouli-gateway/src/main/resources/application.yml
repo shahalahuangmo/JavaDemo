@@ -1,0 +1,59 @@
+server:
+  port: 8010
+spring:
+  application:
+    name: gateway-server
+  #redis相关配置
+  redis:
+    password: 123456
+
+  cloud:
+    # 配置 nacos 注册中心
+    nacos:
+        discovery:
+          server-addr: localhost:8848 #配置Nacos地址
+    gateway:
+      discovery:
+        locator:
+          # 当新加了服务时，不用去配置路由规则和重启网关gateway也能转发
+          #是否与服务注册于发现组件进行结合，通过 serviceId 转发到具体的服务实例。
+          # 默认为 false，设为 true 便开启通过服务中心的自动根据 serviceId 创建路由的功能。
+          enabled: true
+          lower-case-service-id: true # 开启小写验证，默认feign根据服务名查找都是用的全大写
+      routes:
+        # 用户权限授权服务
+        - id: authentication-server
+          uri: lb://authentication-server
+          filters:
+            - StripPrefix=1
+          predicates:
+            - Path=/authentication/**
+        # 管理 feign 服务
+        - id: feign
+          uri: lb://feign
+          predicates:
+            - Path=/adminfeign/**
+          filters:
+            - StripPrefix=1
+
+        # 用户权限授权服务
+        - id: user-server
+          uri: lb://user-server
+          filters:
+           - StripPrefix=1
+           - SwaggerHeaderFilter
+          predicates:
+            - Path=/user/**
+
+  security: #security
+    oauth2:
+      resourceserver:
+        jwt:
+          # 获取JWT验签公钥请求路径
+          jwk-set-uri: 'http://localhost:8001/getPublicKey'
+
+logging:
+  level:
+    per.lx: DEBUG
+
+
