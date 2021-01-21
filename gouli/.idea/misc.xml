@@ -10,6 +10,9 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/admin/pom.xml" />
+        <option value="$PROJECT_DIR$/gouli-admin-server/pom.xml" />
+        <option value="$PROJECT_DIR$/gouli-zipkin-server/pom.xml" />
+        <option value="$PROJECT_DIR$/nacos-config-client/pom.xml" />
       </set>
     </option>
   </component>

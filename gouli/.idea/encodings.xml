@@ -2,11 +2,12 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/gouli-authentication-server/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/gouli-authentication-server/src/main/resources/application.yml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/gouli-authentication-server/src/main/resources/bootstrap.yml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/gouli-authentication-server/src/main/resources/youlai.jks" charset="GBK" />
     <file url="file://$PROJECT_DIR$/gouli-common/gouli-common-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gouli-common/gouli-common-redis/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gouli-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gouli-monitor-center/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gouli-user/gouli-user-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gouli-user/gouli-user-biz/src/main/java" charset="UTF-8" />
   </component>

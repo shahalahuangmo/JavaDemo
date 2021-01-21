@@ -1,19 +1,19 @@
-package com.gouli.user.biz;
+package com.gouli.monitor;
 
-import org.mybatis.spring.annotation.MapperScan;
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author pengnanfa
- * @date 2021/1/16 23:50
+ * @date 2021/1/20 11:28
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan("com.gouli.user.biz.mapper") //扫描mapper
-public class UserApplication {
+@EnableAdminServer
+public class MonitorCenterApplication {
     public static void main(String[] args) {
-        SpringApplication.run(UserApplication.class, args);
+        SpringApplication.run(MonitorCenterApplication.class, args);
     }
 }

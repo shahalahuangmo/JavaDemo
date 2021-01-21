@@ -13,6 +13,7 @@
         <module>gouli-common</module>
         <module>gouli-authentication-server</module>
         <module>gouli-gateway</module>
+        <module>gouli-monitor-center</module>
     </modules>
 
     <properties>
@@ -101,6 +102,17 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
             <version>${mapstruct.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <!--SpringCloud-Nacos相关-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
     </dependencies>
 

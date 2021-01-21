@@ -1,7 +1,5 @@
 package com.gouli.user.biz.filter;
 
-
-
 import com.gouli.common.core.constant.system.SystemConstants;
 import com.gouli.common.core.excetion.CustomException;
 import com.gouli.common.core.responseresult.ResponseData;
