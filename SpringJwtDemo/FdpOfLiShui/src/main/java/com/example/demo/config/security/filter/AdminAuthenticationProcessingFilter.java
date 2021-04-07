@@ -33,7 +33,8 @@ public class AdminAuthenticationProcessingFilter  extends AbstractAuthentication
      * @param adminAuthenticationSuccessHandler: 认证成功处理
      * @param adminAuthenticationFailureHandler: 认证失败处理
      */
-    public AdminAuthenticationProcessingFilter(CusAuthenticationManager authenticationManager, AdminAuthenticationSuccessHandler adminAuthenticationSuccessHandler, AdminAuthenticationFailureHandler adminAuthenticationFailureHandler) {
+    public AdminAuthenticationProcessingFilter(CusAuthenticationManager authenticationManager, AdminAuthenticationSuccessHandler adminAuthenticationSuccessHandler,
+                                               AdminAuthenticationFailureHandler adminAuthenticationFailureHandler) {
         super(new AntPathRequestMatcher("/login", "POST"));
         this.setAuthenticationManager(authenticationManager);
         this.setAuthenticationSuccessHandler(adminAuthenticationSuccessHandler);
