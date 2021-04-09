@@ -29,6 +29,14 @@ public interface UserMapper extends BaseMapper<User> {
     List<User> getUserByUserName(String username);
 
     /**
+     * 获取用户通过用户名
+     * @param username 用户名
+     * @return User getUserByUserName
+     */
+    @Select("select * from user where username = #{username} and phone = #{phone}")
+    List<User> getUserByUserName(String username,String phone);
+
+    /**
      *  更新用户token信息通过用户Id
      * @param id 用户Id
      * @param token 用户token信息
