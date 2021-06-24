@@ -13,6 +13,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -33,15 +34,17 @@ import java.nio.charset.Charset;
  * 资源服务器配置
  * @author pengnanfa
  * @date 2021/1/15 8:45
+ * 注解需要使用@EnableWebFluxSecurity而非@EnableWebSecurity,因为SpringCloud Gateway基于WebFlux
  */
 @AllArgsConstructor
 @Configuration
-// 注解需要使用@EnableWebFluxSecurity而非@EnableWebSecurity,因为SpringCloud Gateway基于WebFlux
 @EnableWebFluxSecurity
 public class ResourceServerConfig {
 
-    //security的鉴权排除列表
-    public static final String[] excludedAuthPages = {
+    /**
+     * SpringCloud security的鉴权排除列表
+     */
+    public static final String[] EXCLUDED_AUTH_PAGES = {
             "/authentication/oauth/login",
             "/authentication/oauth/getCode",
             "/authentication/oauth/token",
@@ -67,14 +70,19 @@ public class ResourceServerConfig {
         // 自定义处理JWT请求头过期或签名错误的结果
         http.oauth2ResourceServer().authenticationEntryPoint(authenticationEntryPoint());
         http.authorizeExchange()
-                .pathMatchers(excludedAuthPages)
-                .permitAll()
+                .pathMatchers(EXCLUDED_AUTH_PAGES).permitAll()
+                // 包含自定义header字段的跨域请求，浏览器会先向服务器发送OPTIONS请求，探测该服务器是否允许自定义的跨域字段。 这里放开所有的OPTIONS请求
+                // 否则 Request header field xfilesize is not allowed by Access-Control-Allow-Headers
+                .pathMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyExchange()
                 .access(authorizationManager)
                 .and()
                 .exceptionHandling()
-                .accessDeniedHandler(accessDeniedHandler()) // 处理未授权
-                .authenticationEntryPoint(authenticationEntryPoint()) //处理未认证
+                // 处理未授权
+                .accessDeniedHandler(accessDeniedHandler())
+                //处理未认证
+                .authenticationEntryPoint(authenticationEntryPoint())
+                .and().cors()
                 .and().csrf().disable();
 
         return http.build();

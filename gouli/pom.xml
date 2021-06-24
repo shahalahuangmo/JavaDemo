@@ -39,17 +39,17 @@
     </parent>
 
     <dependencies>
-        <!-- 集成lombok 框架 -->
+        <!-- 集成lombok 插件 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version> ${lombok.version}</version>
+            <version>${lombok.version}</version>
         </dependency>
-        <!--swagger-->
+        <!--swagger2 接口文档-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version> ${swagger.version}</version>
+            <version>${swagger.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
@@ -68,7 +68,7 @@
             <artifactId>hutool-all</artifactId>
             <version>${hutool-all.version}</version>
         </dependency>
-        <!--logback-->
+        <!--logback 日志-->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
@@ -84,15 +84,13 @@
             <artifactId>logback-access</artifactId>
             <version>${logback.version}</version>
         </dependency>
-
-        <!--slf4j-->
+        <!--slf4j 日志-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j-api.version}</version>
         </dependency>
-
-        <!--mapstruct-->
+        <!--mapstruct 对象转换类-->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -103,17 +101,25 @@
             <artifactId>mapstruct-processor</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-
-        <!--SpringCloud-Nacos相关-->
+        <!--SpringCloud ailibaba nacos 服务发现 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+
+        <!--spring-boot-devtools 实现热部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+
+        <!--单元测试框架-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <!--子模块继承后,提供作用:锁定版本+子module不用groupId和version-->
@@ -137,4 +143,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
 </project>

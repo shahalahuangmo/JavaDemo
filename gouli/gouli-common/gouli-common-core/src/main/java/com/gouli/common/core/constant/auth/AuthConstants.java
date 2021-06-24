@@ -35,6 +35,11 @@ public  class AuthConstants {
     public final static String JWT_PAYLOAD_KEY = "payload";
 
     /**
+     * JWT载体用户信息
+     */
+    public final static String CURRENT_USER = "currentUser";
+
+    /**
      * Redis缓存权限规则key
      */
     public final static String RESOURCE_ROLES_KEY = "auth:resourceRoles";
@@ -43,6 +48,12 @@ public  class AuthConstants {
 
 
     // region 用户登录
+
+    /**
+     * 用户登录状态
+     */
+    public final static String REDIS_LOGIN_STATE = "redis_login_state_";
+    
     /**
      * 用户登录异常
      */

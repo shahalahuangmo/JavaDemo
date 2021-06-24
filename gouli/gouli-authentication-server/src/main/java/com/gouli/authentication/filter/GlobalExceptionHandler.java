@@ -7,6 +7,9 @@ import com.gouli.common.core.responseresult.ResultCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -51,6 +54,26 @@ public class GlobalExceptionHandler  {
     public ResponseData internalAuthenticationServiceExceptionHandler(InternalAuthenticationServiceException e) {
         log.error(SystemConstants.BUSINESS_ERROR_LOGGING,e.getMessage());
         return ResponseData.failed(ResultCodeEnum.USER_LOGIN_ERROR);
+    }
+
+    /**
+     * 拦截表单参数校验
+     */
+    @ExceptionHandler({BindException.class})
+    public ResponseData bindException(BindException e) {
+        BindingResult bindingResult = e.getBindingResult();
+        ResultCodeEnum.USER_REQUEST_PARAM_ERROR.setMessage(bindingResult.getFieldError().getDefaultMessage());
+        return ResponseData.failed(ResultCodeEnum.USER_REQUEST_PARAM_ERROR);
+    }
+
+    /**
+     * 拦截JSON参数校验
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseData bindException(MethodArgumentNotValidException e) {
+        BindingResult bindingResult = e.getBindingResult();
+        ResultCodeEnum.USER_REQUEST_PARAM_ERROR.setMessage(bindingResult.getFieldError().getDefaultMessage());
+        return ResponseData.failed(ResultCodeEnum.USER_REQUEST_PARAM_ERROR);
     }
 
      /**

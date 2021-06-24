@@ -8,13 +8,17 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
 
 /**
- * {@link RedisSerializer} FastJson Generic Impl
+ *  {@link RedisSerializer} FastJson Generic Impl
+ * @author pengnanfa
+ * @date 2021/1/16 23:50
  */
 public class GenericFastJsonRedisSerializer implements RedisSerializer<Object> {
-    private final static ParserConfig defaultRedisConfig = new ParserConfig();
+    private final static ParserConfig DEFAULT_REDIS_CONFIG = new ParserConfig();
     static {
-        defaultRedisConfig.setAutoTypeSupport(true);}// 这里设置AutoType为True解决序列化失败autoType is not support的问题
+        // 这里设置AutoType为True解决序列化失败autoType is not support的问题
+        DEFAULT_REDIS_CONFIG.setAutoTypeSupport(true);}
 
+    @Override
     public byte[] serialize(Object object) throws SerializationException {
         if (object == null) {
             return new byte[0];
@@ -26,12 +30,13 @@ public class GenericFastJsonRedisSerializer implements RedisSerializer<Object> {
         }
     }
 
+    @Override
     public Object deserialize(byte[] bytes) throws SerializationException {
         if (bytes == null || bytes.length == 0) {
             return null;
         }
         try {
-            return JSON.parseObject(new String(bytes, IOUtils.UTF8), Object.class, defaultRedisConfig);
+            return JSON.parseObject(new String(bytes, IOUtils.UTF8), Object.class, DEFAULT_REDIS_CONFIG);
         } catch (Exception ex) {
             throw new SerializationException("Could not deserialize: " + ex.getMessage(), ex);
         }

@@ -23,7 +23,7 @@ debug:当此属性设置为true时，将打印出logback内部日志信息，实
     <appender name="mysqlDB" class="ch.qos.logback.classic.db.DBAppender">
         <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
             <driverClass>com.mysql.cj.jdbc.Driver</driverClass>
-            <url>jdbc:mysql://127.0.0.1:3306/demo?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC&amp;rewriteBatchedStatements=true&amp;allowPublicKeyRetrieval=true</url>
+            <url>jdbc:mysql://10.100.132.213:3306/nacos_config?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8&amp;autoReconnect=true&amp;nullCatalogMeansCurrent=true</url>
             <user>root</user>
             <password>123456</password>
         </connectionSource>

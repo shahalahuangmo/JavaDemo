@@ -13,10 +13,11 @@ import java.util.List;
 /**
  * WebConfiguration 配置类
  * 处理SpringBoot统一返回处理遇到的问题cannot be cast to java.lang.String
+ * EnableWebMvc 缺点是会屏蔽掉springboot默认的其他mvc配置，比如ExceptionHandler、ExceptionResolver等）
  * @author pengnanfa
  * @date 2021/1/15 14:54
  */
-@EnableWebMvc // 缺点是会屏蔽掉springboot默认的其他mvc配置，比如ExceptionHandler、ExceptionResolver等）
+@EnableWebMvc
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {
    @Override

@@ -1,7 +1,7 @@
 package com.gouli.authentication.config;
 
 import com.gouli.authentication.entity.User;
-import com.gouli.authentication.service.UserService;
+import com.gouli.authentication.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -29,21 +29,21 @@ import java.util.Map;
 
 /**
  * 用户权限配置类
+ *
  * @author pengnanfa
  * @date 2021/1/15 8:45
  */
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
     @Autowired
-    // Token 保存到redis 中
-    // @Qualifier("redisTokenStore")
     @Qualifier("jwtTokenStore")
     private TokenStore tokenStore;
 
@@ -55,12 +55,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
         List<TokenEnhancer> delegates = new ArrayList<>();
-        delegates.add(tokenEnhancer()); //配置JWT的内容增强器
+        //配置JWT的内容增强器
+        delegates.add(tokenEnhancer());
         delegates.add(jwtAccessTokenConverter());
         enhancerChain.setTokenEnhancers(delegates);
         endpoints.authenticationManager(authenticationManager)
                 .userDetailsService(userService)
-                .tokenStore(tokenStore) //配置令牌存储策略
+                //配置令牌存储策略
+                .tokenStore(tokenStore)
                 .accessTokenConverter(jwtAccessTokenConverter())
                 .tokenEnhancer(enhancerChain)
                 // refresh token有两种使用方式：重复使用(true)、非重复使用(false)，默认为true
@@ -74,11 +76,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients.inMemory()
                 .withClient("admin")
                 .secret(passwordEncoder.encode("admin123456"))
-                .authorizedGrantTypes("password","refresh_token")
-                .autoApprove(true) //自动授权配置
+                .authorizedGrantTypes("password", "refresh_token")
+                //自动授权配置
+                .autoApprove(true)
                 .scopes("all")
-                .accessTokenValiditySeconds(60*60*30) // 令牌默认有效期2小时
-                .refreshTokenValiditySeconds(60*60*24*3); //  刷新令牌默认有效期3天
+                // 令牌默认有效期2小时
+                .accessTokenValiditySeconds(60 * 60 * 2)
+                //  刷新令牌默认有效期3天
+                .refreshTokenValiditySeconds(60 * 60 * 24 * 3);
     }
 
     /**
@@ -98,9 +103,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public KeyPair keyPair() {
         KeyStoreKeyFactory factory = new KeyStoreKeyFactory(
                 new ClassPathResource("youlai.jks"), "123456".toCharArray());
-        KeyPair keyPair = factory.getKeyPair(
+        return factory.getKeyPair(
                 "youlai", "123456".toCharArray());
-        return keyPair;
     }
 
     /**
@@ -121,7 +125,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
         security.tokenKeyAccess("isAuthenticated()")
-                .checkTokenAccess("permitAll()"); // 获取密钥需要身份认证，使用单点登录时必须配置
+                // 获取密钥需要身份认证，使用单点登录时必须配置
+                .checkTokenAccess("permitAll()");
     }
 }
 

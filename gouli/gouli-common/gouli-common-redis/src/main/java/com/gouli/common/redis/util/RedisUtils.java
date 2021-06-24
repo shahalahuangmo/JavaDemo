@@ -11,7 +11,9 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ *  Redis 操作类
+ * @author pengnanfa
+ * @date 2021/1/16 23:50
  */
 @Component
 public class RedisUtils {
@@ -75,7 +77,7 @@ public class RedisUtils {
             if (key.length == 1) {
                 redisTemplate.delete(key[0]);
             } else {
-                redisTemplate.delete(String.valueOf(CollectionUtils.arrayToList(key)));
+                redisTemplate.delete(CollectionUtils.arrayToList(key));
             }
         }
     }
@@ -495,11 +497,12 @@ public class RedisUtils {
      * @param values 值 可以是多个
      * @return 成功个数
      */
-    public long AddSortedSetAndTime(String key, long time, Object... values) {
+    public long addSortedSetAndTime(String key, long time, Object... values) {
         try {
             Long count = redisTemplate.opsForSet().add(key, values);
-            if (time > 0)
+            if (time > 0) {
                 expire(key, time);
+            }
             return count;
         } catch (Exception e) {
             e.printStackTrace();

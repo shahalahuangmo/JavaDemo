@@ -8,6 +8,11 @@ package com.gouli.common.core.constant.system;
 public class SystemConstants {
 
     /**
+     *  重复值编码
+     */
+    public final static String DUPLICATE_CODE = "A0213";
+
+    /**
      * 执行成功
      */
     public final static String EXECUTION_SUCCESS = "成功";
@@ -180,5 +185,9 @@ public class SystemConstants {
      */
     public final static String DATABASE_PRIMARY_KEY_CONFLICT = "主键冲突";
 
+    // endregion
+
+    // region 编码转换
+    public  final  static  String FORMAT_NUMBER = "%04d";
     // endregion
 }

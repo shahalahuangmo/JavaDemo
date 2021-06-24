@@ -33,7 +33,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         PathMatcher pathMatcher = new AntPathMatcher();
 
         // TODO 忽略url请放在此处进行过滤放行
-        for (String item : ResourceServerConfig.excludedAuthPages) {
+        for (String item : ResourceServerConfig.EXCLUDED_AUTH_PAGES) {
             if (pathMatcher.match(item, path)) {
                 return Mono.just(new AuthorizationDecision(true));
             }

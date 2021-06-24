@@ -10,8 +10,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>gouli-common-core</artifactId>
+    <properties>
+        <gouli.version>1.0-SNAPSHOT</gouli.version>
+        <docker.image.prefix>gouli</docker.image.prefix>
+    </properties>
 
     <dependencies>
+        <!-- redis 公共DTO模块-->
+        <dependency>
+            <groupId>com.gouli</groupId>
+            <artifactId>gouli-common-dto</artifactId>
+            <version>${gouli.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
@@ -19,6 +29,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <!--pagehelper分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.13</version>
         </dependency>
     </dependencies>
 </project>

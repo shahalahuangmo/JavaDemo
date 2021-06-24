@@ -18,8 +18,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    //security的鉴权排除列表
-    private static final String[] excludedAuthPages = {
+    /**
+     * security的鉴权排除列表
+     */
+    private static final String[] EXCLUDED_AUTH_PAGES = {
             "/getPublicKey",
             "/oauth/**",
             "/login/**",
@@ -28,6 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/swagger-resources/**",
             "/v2/*",
             "/webjars/**",
+            "/actuator/**",
     };
 
     @Bean
@@ -47,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers(excludedAuthPages)
+                .antMatchers(EXCLUDED_AUTH_PAGES)
                 .permitAll()
                 .anyRequest()
                 .authenticated()

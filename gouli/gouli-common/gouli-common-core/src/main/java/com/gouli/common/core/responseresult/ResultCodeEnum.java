@@ -64,6 +64,18 @@ public enum ResultCodeEnum {
      */
     CLIENT_AUTHENTICATION_FAILED("A0212", "客户端认证失败"),
     /**
+     * 用户名重复
+     * code A0213
+     * message 用户名重复
+     */
+    USERNAME_DUPLICATE("A0213", "用户名重复"),
+    /**
+     * 密码错误
+     * code A0214
+     * message 用户密码错误
+     */
+    PASSWORD_ERROR("A0214", "密码错误"),
+    /**
      * token无效或已过期
      * code A0230
      * message token无效或已过期
@@ -71,22 +83,22 @@ public enum ResultCodeEnum {
     TOKEN_INVALID_OR_EXPIRED("A0230", "token无效或已过期"),
     /**
      * 验证码不存在
-     * code A0213
+     * code A0215
      * message 验证码不存在
      */
-    VALIDATE_EXIST("A0213", "验证码不存在"),
+    VALIDATE_EXIST("A0215", "验证码不存在"),
     /**
      * 验证码错误
-     * code A0214
+     * code A0216
      * message 验证码错误
      */
-    VALIDATE_ERROR("A0214", "验证码错误"),
+    VALIDATE_ERROR("A0216", "验证码错误"),
     /**
      * 验证码过期
-     * code A0215
+     * code A0217
      * message 验证码过期
      */
-    VALIDATE_EXPIRED("A0215", "验证码过期"),
+    VALIDATE_EXPIRED("A0217", "验证码过期"),
 
     /**
      * 访问权限异常

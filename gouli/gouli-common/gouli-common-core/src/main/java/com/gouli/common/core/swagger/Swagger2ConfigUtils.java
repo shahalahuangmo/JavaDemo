@@ -35,7 +35,8 @@ public class Swagger2ConfigUtils {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo(moduleName))
                 //.groupName(groupName) 这里暂时不用分组，主要是与Gateway集成比较复杂
-                .enable(isShow)//通过flag判断是否开启
+                //通过flag判断是否开启
+                .enable(isShow)
                 .select()
                 /**
                  * apis():指定扫描的接口

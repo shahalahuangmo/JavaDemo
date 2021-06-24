@@ -1,6 +1,7 @@
 package com.pkpm.user.api.controller;
 
 import com.gouli.common.core.responseresult.ResponseData;
+import com.gouli.common.dto.output.user.UsersDTO;
 import com.pkpm.user.api.feign.UsersFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,22 +20,22 @@ public class UsersController {
     private UsersFeign usersFeign;
 
     @GetMapping("/index")
-    public ResponseData index(){
+    public ResponseData<String> index(){
         return usersFeign.index();
     }
 
     @GetMapping("/getUser")
-    public ResponseData getUser(){
+    public ResponseData<UsersDTO> getUser(){
         return usersFeign.getUser();
     }
 
     @GetMapping("/addUser")
-    public ResponseData addUser(){
+    public ResponseData<Integer> addUser(){
         return usersFeign.addUser();
     }
 
     @GetMapping("/testUser")
-    public ResponseData testUser(){
+    public ResponseData<Integer> testUser(){
         return usersFeign.testUser();
     }
 }

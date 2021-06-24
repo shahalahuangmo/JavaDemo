@@ -18,7 +18,7 @@ public interface UsersMapper extends BaseMapper<Users> {
 
     @Insert(
             {   "<script>",
-                   "INSERT INTO `auth`.`users`(`username`, `password`, `enabled`) ",
+                   "INSERT INTO `users`(`username`, `password`, `enabled`) ",
                     "VALUES",
                     "<foreach collection ='list' item='users' separator =','>",
                     "(#{users.username},#{users.password},1)",

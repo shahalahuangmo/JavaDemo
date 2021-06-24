@@ -1,7 +1,7 @@
 package com.gouli.user.biz.converter;
 
+import com.gouli.common.dto.output.user.UsersDTO;
 import com.gouli.user.biz.beans.Users;
-import com.gouli.user.biz.dtos.UsersDTO;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 

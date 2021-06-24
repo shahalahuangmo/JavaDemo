@@ -8,12 +8,16 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/gouli-user/gouli-user-biz/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/admin/pom.xml" />
         <option value="$PROJECT_DIR$/gouli-admin-server/pom.xml" />
+        <option value="$PROJECT_DIR$/gouli-common/gouli-common-db/pom.xml" />
+        <option value="$PROJECT_DIR$/gouli-common/gouli-common-mybatisplus/pom.xml" />
+        <option value="$PROJECT_DIR$/gouli-user/gouli-user-test/pom.xml" />
         <option value="$PROJECT_DIR$/gouli-zipkin-server/pom.xml" />
         <option value="$PROJECT_DIR$/nacos-config-client/pom.xml" />
       </set>
@@ -21,5 +25,18 @@
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="myConfigurationMap">
+      <map>
+        <entry key="$PROJECT_DIR$">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="trunkUrl" value="http://10.100.132.198:8000/svn/pkpmglkzpt/GLJAVA/gouli" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

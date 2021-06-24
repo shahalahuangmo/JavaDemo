@@ -9,35 +9,37 @@
         <outputRelativeToContentRoot value="true" />
         <module name="gouli-common-core" />
         <module name="gouli-common-redis" />
+        <module name="gouli-monitor-center" />
         <module name="gouli-authentication-server" />
         <module name="gouli-user-biz" />
-        <module name="gouli-monitor-center" />
+        <module name="gouli-common-mysql" />
         <module name="gouli-gateway" />
+        <module name="gouli-common-dto" />
         <module name="gouli-user-api" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
-      <module name="admin" target="1.8" />
-      <module name="gouli-admin-server" target="1.8" />
-      <module name="gouli-zipkin-server" target="1.8" />
-      <module name="nacos-config-client" target="1.8" />
+      <module name="gouli-common-db" target="1.8" />
+      <module name="gouli-common-mybatisplus" target="1.8" />
+      <module name="gouli-user-test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="admin" options="-parameters" />
-      <module name="gouli-admin-server" options="-parameters" />
       <module name="gouli-authentication-server" options="-parameters" />
       <module name="gouli-common" options="-parameters" />
       <module name="gouli-common-core" options="-parameters" />
+      <module name="gouli-common-db" options="-parameters" />
+      <module name="gouli-common-dto" options="-parameters" />
+      <module name="gouli-common-mybatisplus" options="-parameters" />
+      <module name="gouli-common-mysql" options="-parameters" />
       <module name="gouli-common-redis" options="-parameters" />
       <module name="gouli-gateway" options="-parameters" />
       <module name="gouli-monitor-center" options="-parameters" />
       <module name="gouli-user" options="-parameters" />
       <module name="gouli-user-api" options="-parameters" />
       <module name="gouli-user-biz" options="-parameters" />
-      <module name="gouli-zipkin-server" options="-parameters" />
-      <module name="nacos-config-client" options="-parameters" />
+      <module name="gouli-user-test" options="-parameters" />
     </option>
   </component>
 </project>

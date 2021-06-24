@@ -11,15 +11,17 @@ import java.nio.charset.Charset;
 /**
  * FastJson序列化
  * @param <T>
+ * @author pengnanfa
+ * @date 2021/1/16 23:50
  */
 public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
     /**
      * 解决反序列化时Could not deserialize: autoType is not support. 的问题
      */
-    private final static ParserConfig defaultRedisConfig = new ParserConfig();
+    private final static ParserConfig DEFAULT_REDIS_CONFIG = new ParserConfig();
 
     static {
-        defaultRedisConfig.setAutoTypeSupport(true);
+        DEFAULT_REDIS_CONFIG.setAutoTypeSupport(true);
     }
 
     /**
@@ -62,10 +64,10 @@ public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
         }
         String str = new String(bytes, DEFAULT_CHARSET);
         try {
-            return (T) JSON.parseObject(str, clazz, defaultRedisConfig);
+            return (T) JSON.parseObject(str, clazz, DEFAULT_REDIS_CONFIG);
         }catch (Exception e){
             // 如果报错，再次反序列化并返回
-            return (T) JSON.parseObject(str, clazz, defaultRedisConfig);
+            return (T) JSON.parseObject(str, clazz, DEFAULT_REDIS_CONFIG);
         }
     }
 }

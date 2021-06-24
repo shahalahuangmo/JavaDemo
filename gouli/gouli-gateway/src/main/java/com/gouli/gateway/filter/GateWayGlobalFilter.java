@@ -35,7 +35,7 @@ public class GateWayGlobalFilter implements GlobalFilter, Ordered {
         JWSObject jwsObject = JWSObject.parse(token);
         String payload = jwsObject.getPayload().toString();
         ServerHttpRequest request = exchange.getRequest().mutate()
-                .header(AuthConstants.JWT_PAYLOAD_KEY, payload)
+                .header(AuthConstants.CURRENT_USER, payload)
                 .build();
         exchange = exchange.mutate().request(request).build();
         return chain.filter(exchange);

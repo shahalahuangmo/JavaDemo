@@ -27,10 +27,11 @@ public class SwaggerConfig {
     public Docket docket(Environment environment) {
         // 设置要配置的Swagger环境
         // 通过environment.acceptsProfiles判断是否处在自己设定的环境中
-        Profiles profiles = Profiles.of("dev", "test");
+        Profiles profiles = Profiles.of("dev", "test","prod");
         String moduleName = "user-server";
         String[] basePackage = {"com.gouli.user.biz.controller"};
         Docket docket = Swagger2ConfigUtils.docket(moduleName, environment.acceptsProfiles(profiles), basePackage);
         return docket;
     }
+
 }
