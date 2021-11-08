@@ -2,6 +2,8 @@ package com.example.spockdemo.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Description:
  * @Auther: pengnanfa
@@ -9,11 +11,12 @@ import lombok.Data;
  */
 @Data
 public class UserInfoDTO {
-    public Integer id;
-    public String userName;
-    public String address;
-    public String city;
-    public Integer age;
-    public String email;
-    public String postCode;
+    private Integer id;
+    private String userName;
+    private String address;
+    private String city;
+    private Integer age;
+    private String email;
+    private String postCode;
+    private List<Order> userOrders;
 }

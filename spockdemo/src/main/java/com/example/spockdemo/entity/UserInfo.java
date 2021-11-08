@@ -9,9 +9,10 @@ import lombok.Data;
  */
 @Data
 public class UserInfo {
-    public String userName;
-    public String address;
-    public String city;
-    public Integer age;
-    public String email;
+    private Integer id;
+    private String userName;
+    private String address;
+    private String city;
+    private Integer age;
+    private String email;
 }
