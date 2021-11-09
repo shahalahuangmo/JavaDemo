@@ -53,6 +53,7 @@ class DemoTest extends Specification {
     def "测试方法1"() {
         given: "给定一个前置条件"
         //TODO: code here
+        def person
 
         and: "其他前置条件"
         //TODO: code here
