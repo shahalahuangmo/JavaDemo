@@ -8,16 +8,24 @@ import com.example.spockdemo.mapper.UserMapper;
 import com.example.spockdemo.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @Description:
  * @Auther: pengnanfa
  * @Date: 2021/11/05 /6:29 下午
  */
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 获取用户下信息
+     *
+     * @param id
+     * @return
+     */
     @Override
     public UserInfoDTO getUserById(Integer id) {
         UserInfo userInfo = userMapper.getById(id);
