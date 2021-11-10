@@ -1,9 +1,10 @@
 package groovy
 
-
 import com.example.spockdemo.util.AddressResolutionUtil
+import spock.lang.FailsWith
 import spock.lang.Specification
 import spock.lang.Unroll
+
 /**
  *
  * <p>
@@ -29,5 +30,18 @@ class AddressResolutionUtilTest extends Specification {
         "新疆维吾尔自治区乌鲁木齐市"     || ["province": "新疆维吾尔自治区", "city": "乌鲁木齐市"]
         "新疆维吾尔自治区和田地区"      || ["province": "新疆维吾尔自治区", "city": "和田地区"]
         "新疆维吾尔自治区博尔塔拉蒙古自治州" || ["province": "新疆维吾尔自治区", "city": "博尔塔拉蒙古自治州"]
+    }
+
+    @FailsWith(ArithmeticException.class)
+    def "FailsWith test"() {
+        given:
+        def i = 10
+        def j = 0
+
+        when:
+        def map = i / j
+
+        then:
+        map == 0
     }
 }
