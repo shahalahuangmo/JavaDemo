@@ -43,6 +43,11 @@ public class UserServiceImpl implements UserService {
         return dto;
     }
 
+    @Override
+    public String getHelloMessage(Integer userId) {
+        return "hell world today " + userId;
+    }
+
 
     /**
      * 根据汇率计算金额

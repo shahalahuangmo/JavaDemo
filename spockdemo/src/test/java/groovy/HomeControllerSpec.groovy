@@ -1,18 +1,10 @@
 package groovy
 
 import com.example.spockdemo.controller.HomeController
-import com.example.spockdemo.entity.UserInfo
 import com.example.spockdemo.service.UserService
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.context.TestConfiguration
-import org.springframework.context.annotation.Bean
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import spock.lang.Specification
-import spock.mock.DetachedMockFactory
 
 /**
  *
@@ -22,47 +14,23 @@ import spock.mock.DetachedMockFactory
  *
  * @Author pengnanfa* @Date 2021-11-09 23:00
  */
-@WebMvcTest
 class HomeControllerSpec extends Specification {
-
-    @Autowired
-    MockMvc mockMvc
-
-    @Autowired
-    UserService userService
-
-    def setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(HomeController.class).build()
-    }
-
-    @TestConfiguration
-    static class MockConfig  {
-        DetachedMockFactory detachedMockFactory = new DetachedMockFactory()
-
-        @Bean
-        UserService userService() {
-            return detachedMockFactory.Mock(UserService)
-        }
-    }
+    UserService userService;
+    HomeController homeController
+    ResponseEntity response
 
     def "mvc test"() {
         given:
-        UserInfo userInfo = new UserInfo();
-        userInfo.setId(1);
-        userInfo.setAge(11);
-        userInfo.setCity("北京市");
-        userInfo.setUserName("test01");
-        userService.getUserById(_ as Integer) >> userInfo
+        userService = Stub(UserService) {
+            getHelloMessage(_) >> "hello world"
+        }
+        homeController = new HomeController(userService: userService)
 
         when:
-        def results = mockMvc.perform(MockMvcRequestBuilders.get("/home/getUserById/1"))
+        response = homeController.getHelloMessage(1)
 
         then:
-        results.andExpect(MockMvcResultMatchers.status().isOk())
-
+        response.statusCode == HttpStatus.OK
+        response.body == "hello world"
     }
-
-
-
-
 }

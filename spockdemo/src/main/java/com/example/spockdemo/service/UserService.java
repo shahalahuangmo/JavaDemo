@@ -11,8 +11,11 @@ public interface UserService {
 
     /**
      * 获取用户下信息
+     *
      * @param id
      * @return
      */
     UserInfoDTO getUserById(Integer id);
+
+    String getHelloMessage(Integer userId);
 }
