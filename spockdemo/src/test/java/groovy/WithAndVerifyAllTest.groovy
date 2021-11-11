@@ -16,15 +16,15 @@ class WithAndVerifyAllTest extends Specification {
 
 
     def "test person use with"() {
-        given: "init a person"
+        given:
         def p = new Person(name: "yawn", age: 18, birthday: "1995-05-25")
 
         expect: "测试"
-        with(p) {
-            name == "yawn"
-            age < 20
-            birthday == "1995-05-25"
-        }
+        p.name == "yawn"
+        p.age < 15
+        p.birthday == "1995-05-25"
+
+
     }
 
     def "test person use verifyAll"() {

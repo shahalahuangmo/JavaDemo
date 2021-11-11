@@ -8,8 +8,9 @@ import com.example.spockdemo.entity.UserInfoDTO
 import com.example.spockdemo.exception.ApiException
 import com.example.spockdemo.mapper.UserMapper
 import com.example.spockdemo.service.impl.UserServiceImpl
-import spock.lang.Rollup
+import spock.lang.IgnoreRest
 import spock.lang.Specification
+import spock.lang.Unroll
 
 /**
  *
@@ -23,19 +24,24 @@ class UserServiceTest extends Specification {
 
     //类似于Mockito的@Mock
     @Collaborator
-    UserMapper userMapper = Mock(UserMapper)
+    UserMapper userMapper = Spy()
 
     //类似于Mockito的@InjectMocks
     @Subject
     UserServiceImpl userService
+
 
     def "queryById"() {
         given: "设置请求参数"
         UserInfo userInfo = new UserInfo(id: 1, age: 11, city: "北京市", userName: "test01")
         userMapper.getById(_) >> userInfo
 
+
         when: "设置事件"
         def entity = userService.getUserById(1)
+
+        and:
+        def dt = userService.getUserById(1)
 
         then: "验证结果"
         with(entity) {
@@ -45,8 +51,9 @@ class UserServiceTest extends Specification {
         }
     }
 
+    @IgnoreRest
     def "setOrderAmountByExchange"() {
-        given: "设置请求参数"
+        given:
         UserInfoDTO userInfoDTO = new UserInfoDTO(id: 1, age: 11, city: "北京市", userName: "test01", userOrders: [])
         Order order1 = new Order(id: 1, orderNo: "20211107001", amount: 100, country: "美元")
         Order order2 = new Order(id: 2, orderNo: "20211107002", amount: 100, country: "英镑")
@@ -54,21 +61,25 @@ class UserServiceTest extends Specification {
         userInfoDTO.userOrders << order1
         userInfoDTO.userOrders << order2
 
-        when: "设置事件"
+        when:
         userService.setOrderAmountByExchange(userInfoDTO)
 
-        then: "验证结果"
+        then:
         2 * userMapper.getExchangeByCountry(_) >> 0.15628 >> 0.11579
+        // 2 * userMapper.getExchangeByCountry(_) 表示在for循环中一共调用了2次获取汇率的接口，验证调用了2次
+        // userMapper.getExchangeByCountry(_) >> 0.15628 >> 0.11579 表示第一次调用返回0.1413，第二次调用返回0.1421
 
         and: "验证根据计算后的金额结果是否正确"
+
         with(userInfoDTO) {
             userOrders[0].exchangeAmount == 15.628
             userOrders[1].exchangeAmount == 11.579
         }
     }
 
-    @Rollup
-    def "验证用户信息的合法性: #expectedMessage"() {
+
+    @Unroll
+    def "验证用户信息的合法性: #expectedMessage #expectedErrCode "() {
 
         when: "调用校验用户方法"
         userService.validateUser(user)

@@ -12,4 +12,9 @@ public class Person {
     private String name;
     private int age;
     private String birthday;
+
+    public String get(){
+        System.out.println("111");
+        return "name";
+    }
 }

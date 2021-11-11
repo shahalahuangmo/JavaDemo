@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
      */
     public void validateUser(UserInfoDTO user) throws ApiException {
         if (user == null) {
-            throw new ApiException("10001", "user is null");
+            throw new ApiException("1000022", "user is null");
         }
         if (null == user.getUserName() || "".equals(user.getUserName())) {
             throw new ApiException("10002", "user name is null");

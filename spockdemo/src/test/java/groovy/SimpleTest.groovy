@@ -1,6 +1,6 @@
 package groovy
 
-
+import com.example.spockdemo.entity.Person
 import com.example.spockdemo.entity.TestEntity
 import org.mockito.Mockito
 import spock.lang.Shared
@@ -71,7 +71,7 @@ class SimpleTest extends Specification {
         testEntity.method1()
         then:
         //Spock语法，意思是判断classa中的method1方法是否被调用了两侧
-        2 * testEntity.method1()
+        3 * testEntity.method1()
     }
 
     def "number of call stub test"() {
@@ -85,6 +85,20 @@ class SimpleTest extends Specification {
         testEntity.method1()
         then:
         //Spock语法，意思是判断classa中的method1方法是否被调用了两侧
-        2 * testEntity.method1()
+        1 * testEntity.method1()
     }
+
+    def "spy " (){
+        given:
+          def  moc = Mock(Person)
+          def spy = Spy(Person)
+
+        when:
+         def mes = spy.get()
+
+        then:
+          mes == "name"
+          // spy.get()
+    }
+
 }
