@@ -11,7 +11,6 @@ import com.example.spockdemo.service.impl.UserServiceImpl
 import spock.lang.IgnoreRest
 import spock.lang.Specification
 import spock.lang.Unroll
-
 /**
  *
  * <p>
@@ -24,9 +23,9 @@ class UserServiceTest extends Specification {
 
     //类似于Mockito的@Mock
     @Collaborator
-    UserMapper userMapper = Spy()
+    UserMapper userMapper = Mock()
 
-    //类似于Mockito的@InjectMocks
+    //类似于Mockito的@InjectMocks 需要使用在实体类上
     @Subject
     UserServiceImpl userService
 
