@@ -9,7 +9,7 @@ public class TokendemoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TokendemoApplication.class, args);
-        System.out.println("启动成功：Sa-Token配置如下：" + SaManager.getConfig());
+        // System.out.println("启动成功：Sa-Token配置如下：" + SaManager.getConfig());
     }
 
 }
