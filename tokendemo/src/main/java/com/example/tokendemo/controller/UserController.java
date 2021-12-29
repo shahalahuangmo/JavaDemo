@@ -1,6 +1,10 @@
 package com.example.tokendemo.controller;
 
+import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,9 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @Author pengnanfa
  * @Date 2021-12-16 22:08
  */
+@Slf4j
 @RestController
 @RequestMapping("/user/")
 public class UserController {
+
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     // region 无指定端登录登出
 
@@ -139,7 +146,17 @@ public class UserController {
      * @return
      */
     @RequestMapping("isLogin")
-    public String isLogin() {
+    public String isLogin() throws JsonProcessingException {
+
+        if (StpUtil.isLogin()) {
+            SaSession saSession = StpUtil.getSession();
+            log.info("saSession: {}", objectMapper.writeValueAsString(saSession));
+
+
+            SaSession saSession1 = StpUtil.getTokenSession();
+            log.info("TokenSession: {}", objectMapper.writeValueAsString(saSession1));
+        }
+
         return "当前会话是否登录：" + StpUtil.isLogin();
     }
 
